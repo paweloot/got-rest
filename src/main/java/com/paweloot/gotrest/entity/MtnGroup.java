@@ -1,6 +1,7 @@
 package com.paweloot.gotrest.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "grupy_gorskie")
@@ -16,6 +17,10 @@ public class MtnGroup {
 
     @Column(name = "nazwa_grupy")
     private String name;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_grupy")
+    private List<Point> points;
 
     public MtnGroup() {
 
@@ -48,5 +53,13 @@ public class MtnGroup {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Point> getPoints() {
+        return points;
+    }
+
+    public void setPoints(List<Point> points) {
+        this.points = points;
     }
 }

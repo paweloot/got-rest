@@ -2,13 +2,12 @@ package com.paweloot.gotrest;
 
 import com.paweloot.gotrest.entity.MtnGroup;
 import com.paweloot.gotrest.entity.MtnRange;
+import com.paweloot.gotrest.entity.Point;
 import com.paweloot.gotrest.repository.MtnRangeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,8 +39,22 @@ public class DatabaseLoader implements CommandLineRunner {
                         "https://www.gazetasenior.pl/wp-content/uploads/2015/03/mountain-484542_640.jpg")
         );
 
+        List<Point> points = Arrays.asList(
+                new Point("Palenica Białczańska", 984),
+                new Point("Polana pod Wołoszynem", 1250),
+                new Point("Wierch Poroniec", 1101),
+                new Point("Dolina Filipka", 944),
+                new Point("Rusinowa Polana", 1210),
+                new Point("Wodogrzmoty Mickiewicza", 1100),
+                new Point("Schronisko PTTK w Roztoce", 1031),
+                new Point("Schronisko PTTK nad Morskim Okiem", 1406)
+        );
+
+        MtnGroup tatryWysokie = new MtnGroup("T.01", "Tatry Wysokie");
+        tatryWysokie.setPoints(points);
+
         mtnRangeList.get(0).setMtnGroups(Arrays.asList(
-                new MtnGroup("T.01", "Tatry Wysokie"),
+                tatryWysokie,
                 new MtnGroup("T.02", "Tatry Zachodnie"),
                 new MtnGroup("T.03", "Podtatrze")
         ));
