@@ -1,5 +1,6 @@
 package com.paweloot.gotrest.rest;
 
+import com.paweloot.gotrest.entity.MtnGroup;
 import com.paweloot.gotrest.entity.MtnRange;
 import com.paweloot.gotrest.service.MtnRangeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class MtnRangeController {
     @GetMapping("/mtnRanges/{mtnRangeId}")
     public MtnRange findById(@PathVariable int mtnRangeId) {
         return mtnRangeService.findById(mtnRangeId);
+    }
+
+    @GetMapping("/mtnRanges/{mtnRangeId}/mtnGroups")
+    public List<MtnGroup> findAllMtnGroupsById(@PathVariable int mtnRangeId) {
+        return mtnRangeService.findAllMtnGroupsById(mtnRangeId);
     }
 
     @PostMapping("/mtnRanges")

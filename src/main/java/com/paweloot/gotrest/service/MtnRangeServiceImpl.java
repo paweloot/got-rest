@@ -1,5 +1,6 @@
 package com.paweloot.gotrest.service;
 
+import com.paweloot.gotrest.entity.MtnGroup;
 import com.paweloot.gotrest.entity.MtnRange;
 import com.paweloot.gotrest.repository.MtnRangeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,14 @@ public class MtnRangeServiceImpl implements MtnRangeService {
         Optional<MtnRange> mtnRange = repository.findById(id);
 
         return mtnRange.orElse(null);
+    }
+
+    @Override
+    public List<MtnGroup> findAllMtnGroupsById(int id) {
+
+        Optional<MtnRange> mtnRange = repository.findById(id);
+
+        return mtnRange.map(MtnRange::getMtnGroups).orElse(null);
     }
 
     @Override
