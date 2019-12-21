@@ -1,6 +1,8 @@
 package com.paweloot.gotrest.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pasma_gorskie")
@@ -16,6 +18,10 @@ public class MtnRange {
 
     @Column(name = "url")
     private String url;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_pasma")
+    private List<MtnGroup> mtnGroups;
 
     public MtnRange() {
 
@@ -48,5 +54,13 @@ public class MtnRange {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public List<MtnGroup> getMtnGroups() {
+        return mtnGroups;
+    }
+
+    public void setMtnGroups(List<MtnGroup> mtnGroups) {
+        this.mtnGroups = mtnGroups;
     }
 }
