@@ -17,6 +17,10 @@ public class Point {
     @Column(name = "wysokosc")
     private int height;
 
+    @ManyToOne
+    @JoinColumn(name = "id_grupy")
+    private MtnGroup mtnGroup;
+
     public Point() {
 
     }
@@ -48,5 +52,13 @@ public class Point {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public MtnGroup getMtnGroup() {
+        return mtnGroup;
+    }
+
+    public void setMtnGroup(MtnGroup mtnGroup) {
+        this.mtnGroup = mtnGroup;
     }
 }

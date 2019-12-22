@@ -1,6 +1,7 @@
 package com.paweloot.gotrest.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,8 +19,7 @@ public class MtnGroup {
     @Column(name = "nazwa_grupy")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_grupy")
+    @OneToMany(mappedBy = "mtnGroup", fetch = FetchType.EAGER)
     private List<Point> points;
 
     public MtnGroup() {
@@ -61,5 +61,14 @@ public class MtnGroup {
 
     public void setPoints(List<Point> points) {
         this.points = points;
+    }
+
+    public void addPoint(Point point) {
+        if (points == null) {
+            points = new ArrayList<>();
+        }
+
+        points.add(point);
+        point.setMtnGroup(this);
     }
 }
