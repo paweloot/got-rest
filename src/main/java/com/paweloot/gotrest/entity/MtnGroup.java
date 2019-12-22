@@ -1,5 +1,7 @@
 package com.paweloot.gotrest.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ public class MtnGroup {
     private String name;
 
     @OneToMany(mappedBy = "mtnGroup", fetch = FetchType.EAGER)
+    @JsonBackReference
     private List<Point> points;
 
     public MtnGroup() {
