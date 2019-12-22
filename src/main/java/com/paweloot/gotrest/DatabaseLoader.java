@@ -1,9 +1,10 @@
 package com.paweloot.gotrest;
 
-import com.paweloot.gotrest.entity.MtnGroup;
-import com.paweloot.gotrest.entity.MtnRange;
-import com.paweloot.gotrest.entity.Point;
+import com.paweloot.gotrest.entity.*;
+import com.paweloot.gotrest.repository.MtnGroupRepository;
 import com.paweloot.gotrest.repository.MtnRangeRepository;
+import com.paweloot.gotrest.repository.PathRepository;
+import com.paweloot.gotrest.repository.PointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -15,16 +16,25 @@ import java.util.List;
 public class DatabaseLoader implements CommandLineRunner {
 
     private MtnRangeRepository mtnRangeRepository;
+    private MtnGroupRepository mtnGroupRepository;
+    private PathRepository pathRepository;
+    private PointRepository pointRepository;
 
     @Autowired
-    public DatabaseLoader(MtnRangeRepository mtnRangeRepository) {
+    public DatabaseLoader(MtnRangeRepository mtnRangeRepository, PathRepository pathRepository,
+                          PointRepository pointRepository, MtnGroupRepository mtnGroupRepository) {
         this.mtnRangeRepository = mtnRangeRepository;
+        this.mtnGroupRepository = mtnGroupRepository;
+        this.pathRepository = pathRepository;
+        this.pointRepository = pointRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
         populateMtnRanges();
+        populatePoints();
+        populatePaths();
     }
 
     private void populateMtnRanges() {
@@ -39,22 +49,8 @@ public class DatabaseLoader implements CommandLineRunner {
                         "https://www.gazetasenior.pl/wp-content/uploads/2015/03/mountain-484542_640.jpg")
         );
 
-        List<Point> points = Arrays.asList(
-                new Point("Palenica Białczańska", 984),
-                new Point("Polana pod Wołoszynem", 1250),
-                new Point("Wierch Poroniec", 1101),
-                new Point("Dolina Filipka", 944),
-                new Point("Rusinowa Polana", 1210),
-                new Point("Wodogrzmoty Mickiewicza", 1100),
-                new Point("Schronisko PTTK w Roztoce", 1031),
-                new Point("Schronisko PTTK nad Morskim Okiem", 1406)
-        );
-
-        MtnGroup tatryWysokie = new MtnGroup("T.01", "Tatry Wysokie");
-        tatryWysokie.setPoints(points);
-
         mtnRangeList.get(0).setMtnGroups(Arrays.asList(
-                tatryWysokie,
+                new MtnGroup("T.01", "Tatry Wysokie"),
                 new MtnGroup("T.02", "Tatry Zachodnie"),
                 new MtnGroup("T.03", "Podtatrze")
         ));
@@ -92,5 +88,45 @@ public class DatabaseLoader implements CommandLineRunner {
 
         mtnRangeRepository.deleteAll();
         mtnRangeRepository.saveAll(mtnRangeList);
+    }
+
+    private void populatePoints() {
+        List<Point> points = Arrays.asList(
+                new Point("Palenica Białczańska", 984),
+                new Point("Polana pod Wołoszynem", 1250),
+                new Point("Wierch Poroniec", 1101),
+                new Point("Dolina Filipka", 944),
+                new Point("Rusinowa Polana", 1210),
+                new Point("Wodogrzmoty Mickiewicza", 1100),
+                new Point("Schronisko PTTK w Roztoce", 1031),
+                new Point("Schronisko PTTK nad Morskim Okiem", 1406)
+        );
+
+        MtnGroup mtnGroup = mtnGroupRepository.findByName("Tatry Wysokie");
+
+        for (Point p : points) {
+            mtnGroup.addPoint(p);
+        }
+
+        pointRepository.deleteAll();
+        pointRepository.saveAll(points);
+    }
+
+    private void populatePaths() {
+
+        Point p1 = pointRepository.findByName("Palenica Białczańska");
+        Point p2 = pointRepository.findByName("Wodogrzmoty Mickiewicza");
+        Point p3 = pointRepository.findByName("Rusinowa Polana");
+        Point p4 = pointRepository.findByName("Polana pod Wołoszynem");
+
+
+        List<Path> paths = Arrays.asList(
+                new Path(p1.getId(), p2.getId(), 2900, 116, 4, 3),
+                new Path(p1.getId(), p3.getId(), 2100, 226, 4, 2),
+                new Path(p4.getId(), p3.getId(), 2200, -40, 3, 3)
+        );
+
+        pathRepository.deleteAll();
+        pathRepository.saveAll(paths);
     }
 }
