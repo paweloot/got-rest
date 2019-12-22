@@ -19,7 +19,7 @@ public class SummaryPathController {
         this.summaryPathService = summaryPathService;
     }
 
-    @GetMapping("/summaryPaths")
+    @PostMapping("/summaryPaths")
     public List<SummaryPath> findAllForPathPoints(@RequestBody List<Integer> pointsIds) {
         return summaryPathService.findAllForPathPoints(pointsIds);
     }
