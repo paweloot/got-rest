@@ -1,15 +1,15 @@
 package com.paweloot.gotrest;
 
 import com.paweloot.gotrest.entity.*;
-import com.paweloot.gotrest.repository.MtnGroupRepository;
-import com.paweloot.gotrest.repository.MtnRangeRepository;
-import com.paweloot.gotrest.repository.PathRepository;
-import com.paweloot.gotrest.repository.PointRepository;
+import com.paweloot.gotrest.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -19,14 +19,17 @@ public class DatabaseLoader implements CommandLineRunner {
     private MtnGroupRepository mtnGroupRepository;
     private PathRepository pathRepository;
     private PointRepository pointRepository;
+    private TouristRepository touristRepository;
 
     @Autowired
     public DatabaseLoader(MtnRangeRepository mtnRangeRepository, PathRepository pathRepository,
-                          PointRepository pointRepository, MtnGroupRepository mtnGroupRepository) {
+                          PointRepository pointRepository, MtnGroupRepository mtnGroupRepository,
+                          TouristRepository touristRepository) {
         this.mtnRangeRepository = mtnRangeRepository;
         this.mtnGroupRepository = mtnGroupRepository;
         this.pathRepository = pathRepository;
         this.pointRepository = pointRepository;
+        this.touristRepository = touristRepository;
     }
 
     @Override
@@ -36,10 +39,12 @@ public class DatabaseLoader implements CommandLineRunner {
         pointRepository.deleteAll();
         mtnGroupRepository.deleteAll();
         mtnRangeRepository.deleteAll();
+        touristRepository.deleteAll();
 
         populateMtnRanges();
         populatePoints();
         populatePaths();
+        populateTourists();
     }
 
     private void populateMtnRanges() {
@@ -130,5 +135,18 @@ public class DatabaseLoader implements CommandLineRunner {
         );
 
         pathRepository.saveAll(paths);
+    }
+
+    private void populateTourists() throws ParseException {
+
+        Date dayOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse("13/07/1998");
+
+        User paweloot = new User("paweloot@gmail.com",
+                "36A7FB9AAA2A91723D954C790FE4D14BFD2E318C8F21809A15CFBF9272952FF5",
+                "Paweł", "Banaś", dayOfBirth);
+
+        Tourist tourist = new Tourist(paweloot, 0);
+
+        touristRepository.save(tourist);
     }
 }
