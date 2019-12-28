@@ -5,6 +5,7 @@ import com.paweloot.gotrest.mtngroup.MtnGroupRepository;
 import com.paweloot.gotrest.mtnrange.MtnRangeRepository;
 import com.paweloot.gotrest.path.PathRepository;
 import com.paweloot.gotrest.point.PointRepository;
+import com.paweloot.gotrest.trip.TripRepository;
 import com.paweloot.gotrest.user.TouristRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,22 +25,25 @@ public class DatabaseLoader implements CommandLineRunner {
     private PathRepository pathRepository;
     private PointRepository pointRepository;
     private TouristRepository touristRepository;
+    private TripRepository tripRepository;
 
     @Autowired
     public DatabaseLoader(MtnRangeRepository mtnRangeRepository, PathRepository pathRepository,
                           PointRepository pointRepository, MtnGroupRepository mtnGroupRepository,
-                          TouristRepository touristRepository) {
+                          TouristRepository touristRepository, TripRepository tripRepository) {
         this.mtnRangeRepository = mtnRangeRepository;
         this.mtnGroupRepository = mtnGroupRepository;
         this.pathRepository = pathRepository;
         this.pointRepository = pointRepository;
         this.touristRepository = touristRepository;
+        this.tripRepository = tripRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
         pathRepository.deleteAll();
+        tripRepository.deleteAll();
         pointRepository.deleteAll();
         mtnGroupRepository.deleteAll();
         mtnRangeRepository.deleteAll();
