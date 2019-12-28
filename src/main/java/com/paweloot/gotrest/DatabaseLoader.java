@@ -32,6 +32,11 @@ public class DatabaseLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        pathRepository.deleteAll();
+        pointRepository.deleteAll();
+        mtnGroupRepository.deleteAll();
+        mtnRangeRepository.deleteAll();
+
         populateMtnRanges();
         populatePoints();
         populatePaths();
@@ -86,7 +91,6 @@ public class DatabaseLoader implements CommandLineRunner {
                 new MtnGroup("S.07", "Pogórze Kaczawskie")
         ));
 
-        mtnRangeRepository.deleteAll();
         mtnRangeRepository.saveAll(mtnRangeList);
     }
 
@@ -108,7 +112,6 @@ public class DatabaseLoader implements CommandLineRunner {
             mtnGroup.addPoint(p);
         }
 
-        pointRepository.deleteAll();
         pointRepository.saveAll(points);
     }
 
@@ -126,7 +129,6 @@ public class DatabaseLoader implements CommandLineRunner {
                 new Path(p4.getId(), p3.getId(), 2200, -40, 3, 3)
         );
 
-        pathRepository.deleteAll();
         pathRepository.saveAll(paths);
     }
 }
