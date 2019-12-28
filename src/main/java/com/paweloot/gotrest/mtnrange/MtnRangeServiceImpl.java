@@ -1,8 +1,7 @@
-package com.paweloot.gotrest.service;
+package com.paweloot.gotrest.mtnrange;
 
 import com.paweloot.gotrest.entity.MtnGroup;
 import com.paweloot.gotrest.entity.MtnRange;
-import com.paweloot.gotrest.repository.MtnRangeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

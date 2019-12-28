@@ -1,7 +1,6 @@
-package com.paweloot.gotrest.rest;
+package com.paweloot.gotrest.mtngroup;
 
 import com.paweloot.gotrest.entity.Point;
-import com.paweloot.gotrest.service.MtnGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

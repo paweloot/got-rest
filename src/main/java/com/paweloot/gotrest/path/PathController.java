@@ -1,7 +1,6 @@
-package com.paweloot.gotrest.rest;
+package com.paweloot.gotrest.path;
 
 import com.paweloot.gotrest.entity.Path;
-import com.paweloot.gotrest.service.PathService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

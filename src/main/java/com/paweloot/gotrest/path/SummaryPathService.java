@@ -1,4 +1,4 @@
-package com.paweloot.gotrest.service;
+package com.paweloot.gotrest.path;
 
 import com.paweloot.gotrest.entity.SummaryPath;
 

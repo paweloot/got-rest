@@ -1,4 +1,4 @@
-package com.paweloot.gotrest.repository;
+package com.paweloot.gotrest.point;
 
 import com.paweloot.gotrest.entity.Point;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-package com.paweloot.gotrest.service;
+package com.paweloot.gotrest.mtnrange;
 
 import com.paweloot.gotrest.entity.MtnGroup;
 import com.paweloot.gotrest.entity.MtnRange;

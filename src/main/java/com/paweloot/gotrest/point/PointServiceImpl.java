@@ -1,8 +1,8 @@
-package com.paweloot.gotrest.service;
+package com.paweloot.gotrest.point;
 
 import com.paweloot.gotrest.entity.Path;
 import com.paweloot.gotrest.entity.Point;
-import com.paweloot.gotrest.repository.PointRepository;
+import com.paweloot.gotrest.path.PathService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

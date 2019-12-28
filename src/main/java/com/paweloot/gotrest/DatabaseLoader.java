@@ -1,7 +1,11 @@
 package com.paweloot.gotrest;
 
 import com.paweloot.gotrest.entity.*;
-import com.paweloot.gotrest.repository.*;
+import com.paweloot.gotrest.mtngroup.MtnGroupRepository;
+import com.paweloot.gotrest.mtnrange.MtnRangeRepository;
+import com.paweloot.gotrest.path.PathRepository;
+import com.paweloot.gotrest.point.PointRepository;
+import com.paweloot.gotrest.user.TouristRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

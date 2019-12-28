@@ -1,4 +1,4 @@
-package com.paweloot.gotrest.repository;
+package com.paweloot.gotrest.user;
 
 import com.paweloot.gotrest.entity.Tourist;
 import org.springframework.data.jpa.repository.JpaRepository;
