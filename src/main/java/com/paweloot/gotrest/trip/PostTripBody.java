@@ -3,14 +3,14 @@ package com.paweloot.gotrest.trip;
 import java.util.Date;
 import java.util.List;
 
-public class TripPostBody {
+public class PostTripBody {
 
     private int userId;
     private Date date;
     private int gotPoints;
     private List<Integer> pointsIds;
 
-    public TripPostBody() {
+    public PostTripBody() {
     }
 
     public int getUserId() {

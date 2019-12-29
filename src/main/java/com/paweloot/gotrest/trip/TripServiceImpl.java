@@ -28,10 +28,10 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public Trip save(TripPostBody tripPostBody) {
+    public Trip save(PostTripBody postTripBody) {
 
         List<TripPoint> tripPoints = new ArrayList<>();
-        List<Integer> pointsIds = tripPostBody.getPointsIds();
+        List<Integer> pointsIds = postTripBody.getPointsIds();
 
         for (int i = 0; i < pointsIds.size(); i++) {
             Point point = pointRepository.findById(pointsIds.get(i)).get();
@@ -43,14 +43,14 @@ public class TripServiceImpl implements TripService {
             tripPoints.add(tripPoint);
         }
 
-        Tourist tourist = touristRepository.findById(tripPostBody.getUserId()).get();
+        Tourist tourist = touristRepository.findById(postTripBody.getUserId()).get();
         int prevGotPoints = tourist.getGotPoints();
-        tourist.setGotPoints(prevGotPoints + tripPostBody.getGotPoints());
+        tourist.setGotPoints(prevGotPoints + postTripBody.getGotPoints());
 
         Trip trip = new Trip();
         trip.setTourist(tourist);
-        trip.setDate(tripPostBody.getDate());
-        trip.setGotPoints(tripPostBody.getGotPoints());
+        trip.setDate(postTripBody.getDate());
+        trip.setGotPoints(postTripBody.getGotPoints());
         trip.setTripPoints(tripPoints);
 
         tripRepository.save(trip);

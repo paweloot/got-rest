@@ -17,7 +17,7 @@ public class TripController {
     }
 
     @PostMapping("/trips")
-    public Trip save(@RequestBody TripPostBody tripPostBody) {
-        return tripService.save(tripPostBody);
+    public Trip save(@RequestBody PostTripBody postTripBody) {
+        return tripService.save(postTripBody);
     }
 }
